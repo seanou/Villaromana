@@ -1,0 +1,14 @@
+{
+  "name": "villa-romana",
+  "version": "1.0.0",
+  "description": "Villa Romana - Accueil, billetterie et informations pratiques",
+  "main": "villa_romana_accueil_billetterie_et_informations (4).html",
+  "scripts": {
+    "build": "mkdir -p dist && cp *.html dist/",
+    "start": "python3 -m http.server 3000",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": ["villa", "romana", "gladiators", "tickets"],
+  "author": "",
+  "license": "ISC"
+}
