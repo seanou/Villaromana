@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Villa Romana</title>
+  <meta name="description" content="Accueil, billetterie et informations pratiques de la Villa Romana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          colors: {
+            primary: { DEFAULT: '#7f1d1d', dark: '#450a0a' },
+            gold1: '#facc15',
+            gold2: '#f59e0b'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root{ color-scheme: light dark; }
+    .hidden-section { display: none; }
+    .active-link { text-decoration: underline; font-weight: bold; }
+    .gradient-gold { @apply bg-gradient-to-r from-gold1 to-gold2 bg-clip-text text-transparent; }
+    .card-info { @apply rounded-xl border border-red-800 bg-red-900/40 p-6 shadow-md transition transform hover:-translate-y-1 hover:shadow-xl hover:border-gold1; }
+    .icon { @apply w-7 h-7 text-gold1; filter: drop-shadow(0 0 4px rgba(250,204,21,0.6)); }
+  </style>
+</head>
+<body class="font-sans bg-primary text-slate-100">
+  <header class="py-6 border-b border-gold1 bg-primary">
+    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <a href="https://imgbb.com/"><img src="https://i.ibb.co/TMTg4H08/Villa.png" alt="Villa Romana" class="h-12 md:h-14 drop-shadow-lg" /></a>
+      <nav class="flex gap-6">
+        <button id="nav-accueil" class="font-semibold gradient-gold">Accueil</button>
+        <button id="nav-billetterie" class="font-semibold gradient-gold">Billetterie</button>
+        <button id="nav-informations" class="font-semibold gradient-gold">Informations</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Section Accueil avec vidéo MP4 -->
+  <main id="section-accueil" class="max-w-full mx-auto">
+    <section class="relative w-full h-[100vh] flex items-center justify-center text-center text-white overflow-hidden">
+      <video id="bg-video" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+        <source src="https://s51.aconvert.com/convert/p3r68-cdx67/baq2d-xos53.mp4" type="video/mp4">
+      </video>
+      <div class="absolute inset-0 bg-black/50"></div>
+
+      <!-- Bouton son -->
+      <button id="sound-toggle" class="absolute bottom-4 right-4 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full shadow-lg transition z-20">🔇</button>
+
+      <div class="relative z-10 p-4">
+        <h1 class="text-5xl md:text-7xl font-bold gradient-gold drop-shadow-lg">Bienvenue à la Villa Romana</h1>
+        <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto drop-shadow-md">Un voyage inoubliable au cœur des combats de gladiateurs.</p>
+        <button onclick="showSection('billetterie')" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold1 to-gold2 text-black h-12 rounded-md px-8 mt-8 font-bold text-lg shadow-lg hover:scale-105 transition">Réservez vos places</button>
+      </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-8">
+      <div class="rounded-lg bg-red-900/40 border border-red-800 p-6 text-center transition hover:shadow-xl hover:scale-105">
+        <img src="http://www.image-heberg.fr/files/17575335534275146917.png" alt="Combats de gladiateurs" class="w-full h-48 object-cover rounded-md mb-4" />
+        <h3 class="text-2xl font-bold gradient-gold mb-2">Combats de Gladiateurs</h3>
+        <p>Vibrez devant la puissance et l’habileté des gladiateurs.</p>
+      </div>
+      <div class="rounded-lg bg-red-900/40 border border-red-800 p-6 text-center transition hover:shadow-xl hover:scale-105">
+        <img src="https://i.ibb.co/Z18zrhVK/c7a8b648-ad30-4ebf-9ba5-5eaa5399fe4a.png" alt="Architecture" class="w-full h-48 object-cover rounded-md mb-4" />
+        <h3 class="text-2xl font-bold gradient-gold mb-2">L’Architecture de l’Arène</h3>
+        <p>Explorez l’imposante reconstitution des gradins et loges.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Section Billetterie -->
+  <main id="section-billetterie" class="max-w-5xl mx-auto px-4 pb-16 hidden-section">
+    <section class="card mt-8 bg-red-900/30 p-6 rounded-xl">
+      <h2 class="text-3xl font-extrabold gradient-gold mb-6">Choisis ta visite</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label for="date" class="label">Date de la visite</label>
+          <input id="date" type="date" class="mt-2 w-full rounded-md px-3 py-2 border bg-white text-black" />
+          <p class="hint mt-1 text-red-400 hidden" id="date-error">La réservation n'est possible que les dimanches.</p>
+        </div>
+        <div>
+          <label for="time" class="label">Heure</label>
+          <select id="time" class="mt-2 w-full rounded-md px-3 py-2 border bg-white text-black">
+            <option value="14:30">14:30</option>
+            <option value="15:30">15:30</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Billets -->
+      <div class="divide-y divide-red-800 border rounded-lg">
+        <div class="flex items-center justify-between p-4">
+          <div><div class="label">Adulte</div><p class="hint">Âge 13+</p><p class="hint money mt-1">8 €</p></div>
+          <div class="flex items-center gap-3">
+            <button class="btn-ghost btn-icon" data-action="dec" data-type="adult">−</button>
+            <span id="qty-adult" class="text-xl font-bold w-8 text-center">1</span>
+            <button class="btn-ghost btn-icon" data-action="inc" data-type="adult">+</button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-4">
+          <div><div class="label">Enfant</div><p class="hint">4 à 12 ans</p><p class="hint money mt-1">5 €</p></div>
+          <div class="flex items-center gap-3">
+            <button class="btn-ghost btn-icon" data-action="dec" data-type="child">−</button>
+            <span id="qty-child" class="text-xl font-bold w-8 text-center">0</span>
+            <button class="btn-ghost btn-icon" data-action="inc" data-type="child">+</button>
+          </div>
+        </div>
+        <div class="flex items-center justify-between p-4">
+          <div><div class="label">Bambin</div><p class="hint">0 à 3 ans</p><p class="hint money mt-1">Gratuit</p></div>
+          <div class="flex items-center gap-3">
+            <button class="btn-ghost btn-icon" data-action="dec" data-type="baby">−</button>
+            <span id="qty-baby" class="text-xl font-bold w-8 text-center">0</span>
+            <button class="btn-ghost btn-icon" data-action="inc" data-type="baby">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-3 rounded-md border p-4 mt-6">
+        <input type="checkbox" id="priority" class="toggle" />
+        <label for="priority" class="label cursor-pointer">Accès prioritaire (+2 € par billet)</label>
+      </div>
+
+      <div class="divider"></div>
+      <div class="flex flex-col sm:flex-row items-center justify-between mt-4">
+        <div class="text-2xl font-extrabold">Total : <span id="total" class="gradient-gold">8 €</span></div>
+        <button id="checkout" class="btn-primary mt-4 sm:mt-0 bg-gradient-to-r from-gold1 to-gold2 text-black font-bold">Acheter les billets</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Section Informations -->
+  <main id="section-informations" class="max-w-5xl mx-auto px-4 py-16 hidden-section">
+    <h2 class="text-4xl font-extrabold text-center gradient-gold mb-12">Informations Pratiques</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="card-info">
+        <div class="flex items-center gap-3 mb-2"><i data-lucide="clock" class="icon"></i><h3 class="text-2xl font-bold gradient-gold">Horaires</h3></div>
+        <p>Dimanche uniquement : 14h30 et 15h30</p>
+      </div>
+      <div class="card-info">
+        <div class="flex items-center gap-3 mb-2"><i data-lucide="map-pin" class="icon"></i><h3 class="text-2xl font-bold gradient-gold">Accès</h3></div>
+        <p>Adresse : 123 Via Romana, 75000 Rome, Italie</p>
+        <p>Parking gratuit et transports en commun.</p>
+      </div>
+      <div class="card-info">
+        <div class="flex items-center gap-3 mb-2"><i data-lucide="shield" class="icon"></i><h3 class="text-2xl font-bold gradient-gold">Règles</h3></div>
+        <p>Respectez les consignes, ne lancez rien dans l’arène.</p>
+      </div>
+      <div class="card-info">
+        <div class="flex items-center gap-3 mb-2"><i data-lucide="mail" class="icon"></i><h3 class="text-2xl font-bold gradient-gold">Contact</h3></div>
+        <p>Email : contact@villaromana.example</p>
+        <p>Téléphone : +33 1 23 45 67 89</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-6 border-t border-gold1 bg-primary">
+    <div class="max-w-5xl mx-auto px-4 text-center text-sm gradient-gold">© 2025 Villa Romana</div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    const dateInput=document.getElementById('date');
+    const dateError=document.getElementById('date-error');
+    dateInput.addEventListener('input',()=>{const d=new Date(dateInput.value);if(d.getDay()!==0){dateInput.value='';dateError.classList.remove('hidden');}else{dateError.classList.add('hidden');}});
+
+    const secAccueil=document.getElementById('section-accueil');
+    const secBil=document.getElementById('section-billetterie');
+    const secInfos=document.getElementById('section-informations');
+    const navAcc=document.getElementById('nav-accueil');
+    const navBil=document.getElementById('nav-billetterie');
+    const navInf=document.getElementById('nav-informations');
+
+    function showSection(sec){
+      secAccueil.classList.add('hidden-section');
+      secBil.classList.add('hidden-section');
+      secInfos.classList.add('hidden-section');
+      navAcc.classList.remove('active-link');
+      navBil.classList.remove('active-link');
+      navInf.classList.remove('active-link');
+      if(sec==='accueil'){secAccueil.classList.remove('hidden-section');navAcc.classList.add('active-link');}
+      if(sec==='billetterie'){secBil.classList.remove('hidden-section');navBil.classList.add('active-link');}
+      if(sec==='infos'){secInfos.classList.remove('hidden-section');navInf.classList.add('active-link');}
+    }
+
+    navAcc.addEventListener('click',()=>showSection('accueil'));
+    navBil.addEventListener('click',()=>showSection('billetterie'));
+    navInf.addEventListener('click',()=>showSection('infos'));
+    showSection('accueil');
+
+    // Bouton son
+    const video = document.getElementById("bg-video");
+    const soundBtn = document.getElementById("sound-toggle");
+    soundBtn.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false;
+        soundBtn.textContent = "🔊";
+      } else {
+        video.muted = true;
+        soundBtn.textContent = "🔇";
+      }
+    });
+  </script>
+</body>
+</html>
